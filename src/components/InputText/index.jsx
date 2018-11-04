@@ -6,11 +6,13 @@ class InputText extends React.Component {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     value: PropTypes.string,
+    placeholder: PropTypes.string,
     changeFieldValue: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     value: '',
+    placeholder: '',
   }
 
   constructor(arg) {
@@ -19,6 +21,7 @@ class InputText extends React.Component {
       invalid: '',
     };
     this.validate = this.validate.bind(this);
+    this.changeFieldValue = this.changeFieldValue.bind(this);
   }
 
   validate(e) {
@@ -27,9 +30,15 @@ class InputText extends React.Component {
     this.setState({ invalid });
   }
 
+  changeFieldValue(e) {
+    const { changeFieldValue } = this.props;
+    changeFieldValue(e);
+    this.validate(e);
+  }
+
   render() {
     const {
-      name, title, value, changeFieldValue,
+      name, title, value, placeholder,
     } = this.props;
     const { invalid } = this.state;
     return (
@@ -40,9 +49,13 @@ class InputText extends React.Component {
           value={value}
           onBlur={this.validate}
           className={invalid}
-          onChange={changeFieldValue}
+          onChange={this.changeFieldValue}
+          placeholder={placeholder}
         />
         <label htmlFor={name}>{title}</label>
+        {(invalid !== '')
+          && <div className="invalid_message"> This field cannot be empty </div>
+        }
       </React.Fragment>);
   }
 }

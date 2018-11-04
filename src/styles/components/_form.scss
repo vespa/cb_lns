@@ -10,6 +10,11 @@ input:-webkit-autofill {
 
 .form {
   width: 100%;
+  .invalid_message {
+    position: absolute;
+    color: red;
+    font-size: 12px;
+  }
 }
 
 .formField {

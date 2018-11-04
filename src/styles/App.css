@@ -387,6 +387,10 @@ input:-webkit-autofill {
 
 .form {
   width: 100%; }
+  .form .invalid_message {
+    position: absolute;
+    color: red;
+    font-size: 12px; }
 
 .formField-input {
   display: flex;

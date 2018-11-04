@@ -47,6 +47,7 @@ class App extends Component {
             fields={[
               {
                 name: 'fullname',
+                placeholder: 'Your name here',
                 value: fullname,
                 title: 'Full Name',
                 validation: 'text',
@@ -55,6 +56,7 @@ class App extends Component {
               {
                 name: 'jobdescription',
                 value: jobdescription,
+                placeholder: 'What is your company position?',
                 title: 'Job description',
                 validation: 'text',
                 classes: 'row-separationMedium',
@@ -69,6 +71,7 @@ class App extends Component {
               {
                 name: 'email',
                 value: email,
+                placeholder: 'your.name@cabify.com',
                 title: 'Email',
                 validation: 'email',
                 classes: 'row-separationMedium',
@@ -84,6 +87,7 @@ class App extends Component {
               {
                 name: 'address',
                 value: address,
+                placeholder: 'your office address',
                 title: 'Adress',
                 validation: 'site',
                 classes: 'row-separationMedium',
