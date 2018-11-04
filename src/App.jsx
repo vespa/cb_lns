@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import Card from './components/Card';
 import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
 
 class App extends Component {
   constructor(args) {
     super(args);
-    this.state = {};
+    this.state = {
+      name: '',
+      jobDescription: '',
+      phone: '',
+      eMail: '',
+      website: 'www.cabify.com',
+      address: '',
+    };
   }
 
   render() {
@@ -18,21 +26,7 @@ class App extends Component {
             </a>
           </figure>
           <h1 className="title-main">Request your business card</h1>
-          <div className="businessCard-cards">
-            <div className="businessCard-cardBack" />
-            <div className="businessCard-cardFront">
-              <div>
-                <p className="businessCard-cardFront-title">Laura Sánchez</p>
-                <p className="businessCard-cardFront-subtitle">Fronte</p>
-              </div>
-              <div className="businessCard-cardFront-bottom">
-                <p className="businessCard-icon-phone">+34 </p>
-                <p className="businessCard-icon-email" />
-                <p className="businessCard-icon-website">www.cabify.com</p>
-                <p className="businessCard-icon-address">Calle Pradillo 42. CP: 28002. Madrid</p>
-              </div>
-            </div>
-          </div>
+          <Card {...this.state} />
         </article>
         <article className="builder col col6">
           <form className="form" action="">
