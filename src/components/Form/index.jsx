@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../InputText';
+import InputEmail from '../InputEmail';
 
 const Form = ({ fields, changeFieldValue }) => {
+  const InputType = (type) => {
+    const types = {
+      email: InputEmail,
+      text: InputText,
+    };
+    const input = types[type] ? types[type] : InputText;
+    return input;
+  };
   return (
     <form className="form" action="">
       {fields.map((item) => {
+        const Input = InputType(item.validation);
         const disabled = !item.readOnly ? '' : ' disabled';
         return (
           <div key={item.name} className={`${item.classes} row`}>
             <div className={`${disabled} formField-input active col col12 `}>
               <div className="input">
-                <InputText {...item} changeFieldValue={changeFieldValue(item.name)} />
+                <Input {...item} changeFieldValue={changeFieldValue(item.name)} />
               </div>
             </div>
           </div>
