@@ -5,7 +5,12 @@ class InputText extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    changeFieldValue: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    value: '',
   }
 
   constructor(arg) {
@@ -23,7 +28,9 @@ class InputText extends React.Component {
   }
 
   render() {
-    const { name, title, value } = this.props;
+    const {
+      name, title, value, changeFieldValue,
+    } = this.props;
     const { invalid } = this.state;
     return (
       <React.Fragment>
@@ -33,6 +40,7 @@ class InputText extends React.Component {
           value={value}
           onBlur={this.validate}
           className={invalid}
+          onChange={changeFieldValue}
         />
         <label htmlFor={name}>{title}</label>
       </React.Fragment>);

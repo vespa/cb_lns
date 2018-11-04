@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../InputText';
 
-const Form = ({ fields }) => {
+const Form = ({ fields, changeFieldValue }) => {
   return (
     <form className="form" action="">
       {fields.map((item) => {
@@ -10,7 +10,7 @@ const Form = ({ fields }) => {
           <div key={item.name} className={`${item.classes} row`}>
             <div className="formField-input active col col12">
               <div className="input">
-                <InputText {...item} />
+                <InputText {...item} changeFieldValue={changeFieldValue(item.name)} />
               </div>
             </div>
           </div>
@@ -25,6 +25,7 @@ const Form = ({ fields }) => {
 
 Form.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  changeFieldValue: PropTypes.func.isRequired,
 };
 // const Form = state => (
 //   <form className="form" action="">

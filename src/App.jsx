@@ -8,16 +8,28 @@ class App extends Component {
   constructor(args) {
     super(args);
     this.state = {
-      name: '',
-      jobDescription: '',
-      phone: '',
-      eMail: '',
+      fullname: '',
+      jobdescription: '',
+      phonenumber: '',
+      email: '',
       website: 'www.cabify.com',
       address: '',
+    };
+    this.changeFieldValue = this.changeFieldValue.bind(this);
+  }
+
+  changeFieldValue(name) {
+    return ({ target: { value } }) => {
+      this.setState({
+        [name]: value,
+      });
     };
   }
 
   render() {
+    const {
+      fullname, jobdescription, phonenumber, email, website, address,
+    } = this.state;
     return (
       <div className="mainWrapper row">
         <article className="businessCard col col6">
@@ -31,38 +43,39 @@ class App extends Component {
         </article>
         <article className="builder col col6">
           <Form
+            changeFieldValue={this.changeFieldValue}
             fields={[
               {
                 name: 'fullname',
-                value: this.state.name,
+                value: fullname,
                 title: 'Full Name',
                 validation: 'text',
                 classes: '',
               },
               {
                 name: 'jobdescription',
-                value: 'Job',
+                value: jobdescription,
                 title: 'Job description',
                 validation: 'text',
                 classes: 'row-separationMedium',
               },
               {
-                name: 'ponenumber',
-                value: '999',
+                name: 'phonenumber',
+                value: phonenumber,
                 title: 'Phone number',
                 validation: 'text',
                 classes: 'row-separationMedium row-gutterMedium',
               },
               {
                 name: 'email',
-                value: '@',
+                value: email,
                 title: 'Email',
                 validation: 'email',
                 classes: 'row-separationMedium',
               },
               {
                 name: 'website',
-                value: 'www',
+                value: website,
                 title: 'Website',
                 validation: 'site',
                 classes: 'row-separationMedium',
@@ -70,8 +83,8 @@ class App extends Component {
               },
               {
                 name: 'address',
-                value: 'Calle Pradillo 42. CP: 28002. Madrid',
-                title: 'Address',
+                value: address,
+                title: 'Adress',
                 validation: 'site',
                 classes: 'row-separationMedium',
               },
