@@ -3,6 +3,11 @@ import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
 
 class App extends Component {
+  constructor(args) {
+    super(args);
+    this.state = {};
+  }
+
   render() {
     return (
       <div className="mainWrapper row">
@@ -22,7 +27,7 @@ class App extends Component {
               </div>
               <div className="businessCard-cardFront-bottom">
                 <p className="businessCard-icon-phone">+34 </p>
-                <p className="businessCard-icon-email"></p>
+                <p className="businessCard-icon-email" />
                 <p className="businessCard-icon-website">www.cabify.com</p>
                 <p className="businessCard-icon-address">Calle Pradillo 42. CP: 28002. Madrid</p>
               </div>

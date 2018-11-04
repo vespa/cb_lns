@@ -6,7 +6,8 @@
         "no-underscore-dangle": 0,
         "arrow-body-style": 0,
         "class-methods-use-this": 0,
-        "jsx-a11y/label-has-for": 1,
+        "jsx-a11y/label-has-associated-control": 0,
+        "jsx-a11y/label-has-for": 0,
         "linebreak-style": 0,
         "react/jsx-one-expression-per-line": 0
     },
