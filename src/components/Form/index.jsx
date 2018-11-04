@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../InputText';
 import InputEmail from '../InputEmail';
+import InputPhone from '../InputPhone';
 
 const Form = ({ fields, changeFieldValue }) => {
   const InputType = (type) => {
     const types = {
       email: InputEmail,
       text: InputText,
+      phone: InputPhone,
     };
     const input = types[type] ? types[type] : InputText;
     return input;
@@ -16,14 +18,9 @@ const Form = ({ fields, changeFieldValue }) => {
     <form className="form" action="">
       {fields.map((item) => {
         const Input = InputType(item.validation);
-        const disabled = !item.readOnly ? '' : ' disabled';
         return (
           <div key={item.name} className={`${item.classes} row`}>
-            <div className={`${disabled} formField-input active col col12 `}>
-              <div className="input">
-                <Input {...item} changeFieldValue={changeFieldValue(item.name)} />
-              </div>
-            </div>
+            <Input {...item} changeFieldValue={changeFieldValue(item.name)} />
           </div>
         );
       })}
