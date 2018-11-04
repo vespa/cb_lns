@@ -82,7 +82,7 @@ class App extends Component {
                 title: 'Website',
                 validation: 'site',
                 classes: 'row-separationMedium',
-                active: false,
+                readOnly: true,
               },
               {
                 name: 'address',

@@ -6,9 +6,10 @@ const Form = ({ fields, changeFieldValue }) => {
   return (
     <form className="form" action="">
       {fields.map((item) => {
+        const disabled = !item.readOnly ? '' : ' disabled';
         return (
           <div key={item.name} className={`${item.classes} row`}>
-            <div className="formField-input active col col12">
+            <div className={`${disabled} formField-input active col col12 `}>
               <div className="input">
                 <InputText {...item} changeFieldValue={changeFieldValue(item.name)} />
               </div>

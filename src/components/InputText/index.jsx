@@ -8,11 +8,13 @@ class InputText extends React.Component {
     value: PropTypes.string,
     placeholder: PropTypes.string,
     changeFieldValue: PropTypes.func.isRequired,
+    readOnly: PropTypes.bool,
   }
 
   static defaultProps = {
     value: '',
     placeholder: '',
+    readOnly: false,
   }
 
   constructor(arg) {
@@ -38,7 +40,7 @@ class InputText extends React.Component {
 
   render() {
     const {
-      name, title, value, placeholder,
+      name, title, value, placeholder, readOnly,
     } = this.props;
     const { invalid } = this.state;
     return (
@@ -51,6 +53,7 @@ class InputText extends React.Component {
           className={invalid}
           onChange={this.changeFieldValue}
           placeholder={placeholder}
+          readOnly={readOnly}
         />
         <label htmlFor={name}>{title}</label>
         {(invalid !== '')
