@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './components/Card';
+import Form from './components/Form';
 import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
 
@@ -29,63 +30,53 @@ class App extends Component {
           <Card {...this.state} />
         </article>
         <article className="builder col col6">
-          <form className="form" action="">
-            <div className="row">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="fullname" value="Laura Sánchez" />
-                  <label htmlFor="fullname">Full name</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              {/* you probably need to add active/focus/disabled classNames */}
-              <div className="formField-input active focus col col12">
-                <div className="input">
-                  <input type="text" name="jobdescription" value="Fronte" />
-                  <label htmlFor="jobdescription">Job description</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium row-gutterMedium">
-              <div className="col col3">
-                {/* select field will be placed here */}
-              </div>
-              <div className="formField-input col col9">
-                <div className="input">
-                  <input type="tel" name="ponenumber" />
-                  <label htmlFor="ponenumber">Phone number</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input col col12">
-                <div className="input">
-                  <input type="email" name="email" />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input active disabled col col12">
-                <div className="input">
-                  <input type="text" name="website" value="www.cabify.com" />
-                  <label htmlFor="website">Website</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="address" value="Calle Pradillo 42. CP: 28002. Madrid" />
-                  <label htmlFor="address">Address</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationHuge">
-              <input className="button button-full button-primary disabled" type="submit" value="Request" />
-            </div>
-          </form>
+          <Form
+            fields={[
+              {
+                name: 'fullname',
+                value: this.state.name,
+                title: 'Full Name',
+                validation: 'text',
+                classes: '',
+              },
+              {
+                name: 'jobdescription',
+                value: 'Job',
+                title: 'Job description',
+                validation: 'text',
+                classes: 'row-separationMedium',
+              },
+              {
+                name: 'ponenumber',
+                value: '999',
+                title: 'Phone number',
+                validation: 'text',
+                classes: 'row-separationMedium row-gutterMedium',
+              },
+              {
+                name: 'email',
+                value: '@',
+                title: 'Email',
+                validation: 'email',
+                classes: 'row-separationMedium',
+              },
+              {
+                name: 'website',
+                value: 'www',
+                title: 'Website',
+                validation: 'site',
+                classes: 'row-separationMedium',
+                active: false,
+              },
+              {
+                name: 'address',
+                value: 'Calle Pradillo 42. CP: 28002. Madrid',
+                title: 'Address',
+                validation: 'site',
+                classes: 'row-separationMedium',
+              },
+            ]}
+          />
         </article>
       </div>
     );

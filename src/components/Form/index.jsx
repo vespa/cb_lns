@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import style from './style.scss';
-
+import InputText from '../InputText';
 
 const Form = ({ fields }) => {
   return (
     <form className="form" action="">
       {fields.map((item) => {
         return (
-          <div className="row">
+          <div key={item.name} className={`${item.classes} row`}>
             <div className="formField-input active col col12">
               <div className="input">
-                <input type="text" name={item.name} value={item.value} />
-                <label htmlFor="fullname">{item.title}</label>
+                <InputText {...item} />
               </div>
             </div>
           </div>
         );
       })}
+      <div className="row row-separationHuge">
+        <input className="button button-full button-primary disabled" type="submit" value="Request" />
+      </div>
     </form>
   );
 };
