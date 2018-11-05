@@ -45,4 +45,4 @@ const options = FlagOption([
   { country: 'US', number: '+1', name: 'USA' },
 ]);
 
-export default () => <Select options={options} />;
+export default () => <Select options={options} isSearchable={false} name="area" />;

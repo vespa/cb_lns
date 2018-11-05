@@ -9,7 +9,7 @@ const validation = (e, t) => {
   t.setState({ invalid });
 };
 
-const Field = Input(validation, 'not a valid e-mail');
+const Field = Input(validation, 'Not a valid e-mail');
 const Email = props => <InputContainer {...props}><Field {...props} /></InputContainer>;
 
 export default Email;
