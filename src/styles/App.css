@@ -380,21 +380,27 @@ a {
 
 input {
   border: 0;
-  font-family: "Avenir Next", "Avenir", "Segoe UI", sans-serif; }
+  font-family: "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  transition: all 0.3s ease;
+  border-bottom: solid 1px #A7A7B3; }
+  input:focus {
+    border-bottom-color: #6645FF;
+    color: #6645FF; }
 
 input:-webkit-autofill {
   box-shadow: 0 0 0 30px #FFFFFF inset; }
 
 .form {
   width: 100%; }
-  .form .invalid_message {
-    position: absolute;
-    color: red;
-    font-size: 12px; }
+  .form .invalid {
+    border-color: red; }
+    .form .invalid_message {
+      position: absolute;
+      color: red;
+      font-size: 12px; }
 
 .formField-input {
   display: flex;
-  border-bottom: solid 1px #A7A7B3;
   transition: all 0.3s ease; }
   .formField-input.active .input label {
     top: 0; }

@@ -2,6 +2,12 @@
 input {
   border: 0;
   font-family: $mainfont;
+  transition: all $fastest ease;
+  border-bottom: solid 1px $color-positive-lighter;
+  &:focus {
+    border-bottom-color: $color-moradul-dark ;
+    color: $color-moradul-dark;
+  }
 }
 
 input:-webkit-autofill {
@@ -10,17 +16,19 @@ input:-webkit-autofill {
 
 .form {
   width: 100%;
-  .invalid_message {
-    position: absolute;
-    color: red;
-    font-size: 12px;
+  .invalid {
+    border-color: red;
+    &_message {
+      position: absolute;
+      color: red;
+      font-size: 12px;
+    }
   }
 }
 
 .formField {
   &-input {
     display: flex;
-    border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
     &.active {
       .input label {
