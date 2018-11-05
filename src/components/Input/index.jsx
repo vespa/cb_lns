@@ -55,10 +55,15 @@ const Input = (validation, message) => class InputClass extends React.Component 
           readOnly={readOnly}
           onKeyUp={onKeyUp}
           onKeyDown={onKeyUp}
+          autoComplete="off"
         />
         {(invalid !== '')
-            && <div className="invalid_message"> {message} </div>
-          }
+            && (
+            <React.Fragment>
+              <div className="invalid_message"> {message} </div>
+              <div className="invalid_mark"> ! </div>
+            </React.Fragment>
+            )}
       </React.Fragment>);
   }
 };
