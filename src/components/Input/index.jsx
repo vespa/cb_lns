@@ -33,8 +33,8 @@ const Input = (validation, message) => class InputClass extends React.Component 
 
   changeFieldValue(e) {
     const { changeFieldValue } = this.props;
-    changeFieldValue(e);
     this.validate(e);
+    changeFieldValue(e);
   }
 
   render() {
@@ -54,6 +54,7 @@ const Input = (validation, message) => class InputClass extends React.Component 
           placeholder={placeholder}
           readOnly={readOnly}
           onKeyUp={onKeyUp}
+          onKeyDown={onKeyUp}
         />
         {(invalid !== '')
             && <div className="invalid_message"> {message} </div>
