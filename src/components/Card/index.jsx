@@ -13,7 +13,7 @@ const Card = ({
       </div>
       <div className="businessCard-cardFront-bottom">
         <p className="businessCard-icon-phone">{phonenumber} </p>
-        <p className="businessCard-icon-email" > {email} </p>
+        <p className="businessCard-icon-email"> {email} </p>
         <p className="businessCard-icon-website">{website}</p>
         <p className="businessCard-icon-address">{address}</p>
       </div>
@@ -27,6 +27,7 @@ Card.propTypes = {
   phonenumber: PropTypes.string.isRequired,
   website: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default Card;
