@@ -1,15 +1,22 @@
 import React from 'react';
+import SelectFlags from '../SelectFlags';
+import Input from '../Input';
 
-const InputPhone = () => {
+const InputPhone = (props) => {
+  const validation = (e, t) => {
+    const { value } = e.target;
+    const invalid = value === '' ? 'invalid' : '';
+    t.setState({ invalid });
+  };
+  const Field = Input(validation, 'Phone number cannot be empty');
   return (
     <React.Fragment>
-      <div className="col col3">
-        {/* select field will be placed here */}sssss
+      <div className="col col6">
+        <SelectFlags />
       </div>
-      <div className="formField-input col col9">
+      <div className="formField-input col col6">
         <div className="input">
-          <input type="tel" name="ponenumber" />
-          <label htmlFor="ponenumber">Phone number</label>
+          <Field {...props} />
         </div>
       </div>
     </React.Fragment>

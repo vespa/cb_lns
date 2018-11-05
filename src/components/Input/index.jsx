@@ -40,27 +40,24 @@ const Input = (validation, message) => class InputClass extends React.Component 
     const {
       name, title, value, placeholder, readOnly,
     } = this.props;
-    const disabled = !readOnly ? '' : ' disabled';
     const { invalid } = this.state;
     return (
-      <div className={`${disabled} formField-input active col col12 `}>
-        <div className="input">
-          <input
-            type="text"
-            name={name}
-            value={value}
-            onBlur={this.validate}
-            className={invalid}
-            onChange={this.changeFieldValue}
-            placeholder={placeholder}
-            readOnly={readOnly}
-          />
-          <label htmlFor={name}>{title}</label>
-          {(invalid !== '')
+      <React.Fragment>
+        <input
+          type="text"
+          name={name}
+          value={value}
+          onBlur={this.validate}
+          className={invalid}
+          onChange={this.changeFieldValue}
+          placeholder={placeholder}
+          readOnly={readOnly}
+        />
+        <label htmlFor={name}>{title}</label>
+        {(invalid !== '')
             && <div className="invalid_message"> {message} </div>
           }
-        </div>
-      </div>);
+      </React.Fragment>);
   }
 };
 

@@ -1,5 +1,7 @@
+import React from 'react';
 import * as EmailValidator from 'email-validator';
 import Input from '../Input';
+import InputContainer from '../InputTextContainer';
 
 const validation = (e, t) => {
   const { value } = e.target;
@@ -7,4 +9,7 @@ const validation = (e, t) => {
   t.setState({ invalid });
 };
 
-export default Input(validation, 'not a valid e-mail');
+const Field = Input(validation, 'not a valid e-mail');
+const Email = props => <InputContainer {...props}><Field {...props} /></InputContainer>;
+
+export default Email;
