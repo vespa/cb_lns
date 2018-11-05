@@ -1,5 +1,4 @@
 import React from 'react';
-import Select from 'react-select';
 import PropTypes from 'prop-types';
 import FlagIcon from 'react-flag-kit/lib/FlagIcon';
 
@@ -31,10 +30,10 @@ Flag.propTypes = {
 };
 
 const FlagOption = options => options.map(item => (
-  {
-    value: item.number,
-    label: <Flag country={item.country} number={item.number} name={item.name} />,
-  }));
+  <li key={item.number} value={item.number} aria-selected="false" role="option" tabIndex="-1">
+    <Flag country={item.country} number={item.number} name={item.name} />
+  </li>));
+
 
 const options = FlagOption([
   { country: 'BR', number: '+55', name: 'Brazil' },
@@ -45,4 +44,24 @@ const options = FlagOption([
   { country: 'US', number: '+1', name: 'USA' },
 ]);
 
-export default () => <Select options={options} isSearchable={false} name="area" />;
+
+class Select extends React.Component {
+  constructor(arg) {
+    super(arg);
+    this.state = {
+      currentValue: 0,
+    };
+  }
+
+  render() {
+    return (
+      <ul role="listbox" className="listBox" tabIndex="0">
+        <li role="option" value="0" aria-selected="true" tabIndex="-1" />
+        {options}
+      </ul>
+    );
+  }
+}
+
+
+export default Select;

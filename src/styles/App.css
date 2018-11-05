@@ -447,6 +447,13 @@ input:-webkit-autofill {
         border-bottom-color: #6645FF;
         color: #6645FF; }
 
+.listBox {
+  background-color: #eaeaea; }
+  .listBox:focus {
+    background-color: red; }
+  .listBox li:focus {
+    background-color: blue; }
+
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }
 

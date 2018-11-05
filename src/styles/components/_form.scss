@@ -94,3 +94,14 @@ input:-webkit-autofill {
     }
   }
 }
+.listBox{
+  background-color: #eaeaea;
+  &:focus {
+    background-color: red;
+  };
+  li {
+    &:focus {
+      background-color: blue;
+    }
+  }
+}
