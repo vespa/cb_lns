@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../Input';
 import InputContainer from '../InputTextContainer';
 
-const validation = (e, t) => {
+export const validation = (e, t) => {
   const { value } = e.target;
   const invalid = value === '' ? 'invalid' : '';
   t.setState({ invalid });

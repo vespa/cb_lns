@@ -3,7 +3,7 @@ import * as EmailValidator from 'email-validator';
 import Input from '../Input';
 import InputContainer from '../InputTextContainer';
 
-const validation = (e, t) => {
+export const validation = (e, t) => {
   const { value } = e.target;
   const invalid = !EmailValidator.validate(value) ? 'invalid' : '';
   t.setState({ invalid });
