@@ -2,13 +2,14 @@ import React from 'react';
 import SelectFlags from '../SelectFlags';
 import Input from '../Input';
 
-const onlyNumbers = (e) => {
+export const onlyNumbers = (e) => {
   let val = e.target.value;
   val = val.replace(/\D/g, '');
   e.target.value = val;
+  return val;
 };
 
-const validation = (e, t) => {
+export const validation = (e, t) => {
   const { value } = e.target;
   const invalid = value === '' ? 'invalid' : '';
   t.setState({ invalid });
