@@ -2,13 +2,21 @@ import React from 'react';
 import SelectFlags from '../SelectFlags';
 import Input from '../Input';
 
+const validation = (e, t) => {
+  const { value } = e.target;
+  const invalid = value === '' ? 'invalid' : '';
+  t.setState({ invalid });
+};
+
+const onlyNumbers = (e) => {
+  let val = e.target.value;
+  val = val.replace(/\D/g, '');
+  e.target.value = val;
+};
+
+const Field = Input(validation, 'Phone need to be filled');
+
 const InputPhone = (props) => {
-  const validation = (e, t) => {
-    const { value } = e.target;
-    const invalid = value === '' ? 'invalid' : '';
-    t.setState({ invalid });
-  };
-  const Field = Input(validation, 'Phone number cannot be empty');
   return (
     <React.Fragment>
       <div className="col col6">
@@ -16,7 +24,7 @@ const InputPhone = (props) => {
       </div>
       <div className="formField-input col col6">
         <div className="input">
-          <Field {...props} />
+          <Field {...props} onKeyUp={onlyNumbers} />
         </div>
       </div>
     </React.Fragment>

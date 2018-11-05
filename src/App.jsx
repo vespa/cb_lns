@@ -65,6 +65,7 @@ class App extends Component {
                 name: 'phonenumber',
                 value: phonenumber,
                 title: 'Phone number',
+                placeholder: 'Phone number',
                 validation: 'phone',
                 classes: 'row-separationMedium row-gutterMedium',
               },

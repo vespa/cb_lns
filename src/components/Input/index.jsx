@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 const Input = (validation, message) => class InputClass extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     changeFieldValue: PropTypes.func.isRequired,
     readOnly: PropTypes.bool,
+    onKeyUp: PropTypes.func,
   }
 
   static defaultProps = {
     value: '',
     placeholder: '',
     readOnly: false,
+    onKeyUp: () => {},
   }
 
   constructor(arg) {
@@ -38,7 +39,7 @@ const Input = (validation, message) => class InputClass extends React.Component 
 
   render() {
     const {
-      name, title, value, placeholder, readOnly,
+      name, value, placeholder, readOnly, onKeyUp,
     } = this.props;
     const { invalid } = this.state;
     return (
@@ -52,8 +53,8 @@ const Input = (validation, message) => class InputClass extends React.Component 
           onChange={this.changeFieldValue}
           placeholder={placeholder}
           readOnly={readOnly}
+          onKeyUp={onKeyUp}
         />
-        <label htmlFor={name}>{title}</label>
         {(invalid !== '')
             && <div className="invalid_message"> {message} </div>
           }
