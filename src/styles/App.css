@@ -447,12 +447,32 @@ input:-webkit-autofill {
         border-bottom-color: #6645FF;
         color: #6645FF; }
 
-.listBox {
-  background-color: #eaeaea; }
-  .listBox:focus {
-    background-color: red; }
-  .listBox li:focus {
-    background-color: blue; }
+.flagSelector {
+  margin-top: 13px;
+  border-bottom: solid 1px #A7A7B3;
+  overflow: hidden;
+  height: 28px; }
+  .flagSelector:focus {
+    border-bottom: 1px solid #6645FF;
+    background-color: #EAE9F3; }
+  .flagSelector ul {
+    margin-top: 6px;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    z-index: 1;
+    width: 216px;
+    border-radius: 6px;
+    padding: 6px 0;
+    display: none; }
+    .flagSelector ul li {
+      height: 28px;
+      padding: 3px 12px; }
+      .flagSelector ul li:focus {
+        background-color: blue; }
+
+.text-right {
+  text-align: right; }
 
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }

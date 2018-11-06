@@ -94,14 +94,34 @@ input:-webkit-autofill {
     }
   }
 }
-.listBox{
-  background-color: #eaeaea;
+.flagSelector{
+  margin-top: 13px;
+  border-bottom: solid 1px $color-positive-lighter;
+  overflow: hidden;
+  height: 28px;
   &:focus {
-    background-color: red;
+    border-bottom: 1px solid $color-moradul-dark ;
+    background-color: #EAE9F3;
   };
-  li {
-    &:focus {
-      background-color: blue;
+  ul {
+    margin-top: 6px;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    z-index: 1;
+    width: 216px;
+    border-radius: 6px;
+    padding:6px 0;
+    display: none;
+    li {
+      height: 28px;
+      padding: 3px 12px;
+      &:focus {
+        background-color: blue;
+      }
     }
   }
+}
+.text-right {
+  text-align: right;
 }

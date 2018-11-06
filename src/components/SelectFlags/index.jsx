@@ -1,26 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import FlagIcon from 'react-flag-kit/lib/FlagIcon';
 
 const Flag = ({ country, number, name }) => (
-  <div className="row">
-    <div className="col2" style={{ padding: '5px' }}>
-      <div style={{
-        borderRadius: '50%',
-        overflow: 'hidden',
-        height: '15px',
-        width: '15px',
-      }}
-      >
-        <div style={{ position: 'relative', margin: '-4px 0 0 -4px' }}>
-          <FlagIcon code={country} size={23} />
-        </div>
-      </div>
+  <Fragment>
+    <div className="col3">
+      <FlagIcon code={country} size={23} />
     </div>
-    <div className="col10" style={{ padding: '2px' }}>
-      {number} {name}
+    <div className="col7" style={{ padding: '2px' }}>
+      {name}
     </div>
-  </div>
+    <div className="col2 text-right">
+      {number}
+    </div>
+  </Fragment>
 );
 
 Flag.propTypes = {
@@ -30,7 +23,7 @@ Flag.propTypes = {
 };
 
 const FlagOption = options => options.map(item => (
-  <li key={item.number} value={item.number} aria-selected="false" role="option" tabIndex="-1">
+  <li key={item.number} value={item.number} className="row" aria-selected="false" role="option" tabIndex="-1">
     <Flag country={item.country} number={item.number} name={item.name} />
   </li>));
 
@@ -50,15 +43,18 @@ class Select extends React.Component {
     super(arg);
     this.state = {
       currentValue: 0,
+      open: false
     };
   }
 
   render() {
     return (
-      <ul role="listbox" className="listBox" tabIndex="0">
-        <li role="option" value="0" aria-selected="true" tabIndex="-1" />
-        {options}
-      </ul>
+      <div className="flagSelector" role="listbox" tabIndex="0">
+        <div className="currentValue">value </div>
+        <ul className="listBox" tabIndex="-1">
+          {options}
+        </ul>
+      </div>
     );
   }
 }

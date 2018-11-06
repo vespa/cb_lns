@@ -21,10 +21,10 @@ const Field = Input(validation, 'Phone need to be filled');
 const InputPhone = (props) => {
   return (
     <React.Fragment>
-      <div className="col col6">
+      <div className="col col4">
         <SelectFlags />
       </div>
-      <div className="formField-input col col6">
+      <div className="formField-input col col8">
         <div className="input">
           <Field {...props} onKeyUp={onlyNumbers} />
         </div>
