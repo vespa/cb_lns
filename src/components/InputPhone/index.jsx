@@ -22,7 +22,7 @@ const InputPhone = (props) => {
   return (
     <React.Fragment>
       <div className="col col4">
-        <SelectFlags />
+        <SelectFlags {...props} />
       </div>
       <div className="formField-input col col8">
         <div className="input">

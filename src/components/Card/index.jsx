@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Card = ({
-  fullname, jobdescription, phonenumber, website, address, email,
+  fullname, jobdescription, phonenumber, website, address, email, area,
 }) => (
   <div className="businessCard-cards">
     <div className="businessCard-cardBack" />
@@ -12,7 +12,7 @@ const Card = ({
         <p className="businessCard-cardFront-subtitle">{jobdescription}</p>
       </div>
       <div className="businessCard-cardFront-bottom">
-        <p className="businessCard-icon-phone">{phonenumber} </p>
+        <p className="businessCard-icon-phone"> + {area} {phonenumber} </p>
         <p className="businessCard-icon-email"> {email} </p>
         <p className="businessCard-icon-website">{website}</p>
         <p className="businessCard-icon-address">{address}</p>
@@ -27,6 +27,7 @@ Card.propTypes = {
   phonenumber: PropTypes.string.isRequired,
   website: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
+  area: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
 };
 

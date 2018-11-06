@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       fullname: '',
       jobdescription: '',
+      area: 34,
       phonenumber: '',
       email: '',
       website: 'www.cabify.com',
@@ -28,7 +29,7 @@ class App extends Component {
 
   render() {
     const {
-      fullname, jobdescription, phonenumber, email, website, address,
+      fullname, jobdescription, phonenumber, email, website, address, area,
     } = this.state;
     return (
       <div className="mainWrapper row">
@@ -65,6 +66,8 @@ class App extends Component {
                 name: 'phonenumber',
                 value: phonenumber,
                 title: 'Phone number',
+                area,
+                changeArea: this.changeFieldValue('area'),
                 placeholder: 'Phone number',
                 validation: 'phone',
                 classes: 'row-separationMedium row-gutterMedium',

@@ -18,7 +18,7 @@ const Flag = ({ country, number, name }) => (
 
 Flag.propTypes = {
   country: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  number: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
 };
 
@@ -29,20 +29,29 @@ const FlagOption = options => options.map(item => (
 
 
 const options = FlagOption([
-  { country: 'BR', number: '+55', name: 'Brazil' },
-  { country: 'CL', number: '+56', name: 'Chile' },
-  { country: 'CO', number: '+57', name: 'Colombia' },
-  { country: 'ES', number: '+34', name: 'Spain' },
-  { country: 'PT', number: '+351', name: 'Portugal' },
-  { country: 'US', number: '+1', name: 'USA' },
+  { country: 'BR', number: 55, name: 'Brazil' },
+  { country: 'CL', number: 56, name: 'Chile' },
+  { country: 'CO', number: 57, name: 'Colombia' },
+  { country: 'ES', number: 34, name: 'Spain' },
+  { country: 'PT', number: 351, name: 'Portugal' },
+  { country: 'US', number: 1, name: 'USA' },
 ]);
 
 
 class Select extends React.Component {
-  constructor(arg) {
-    super(arg);
+  static propTypes = {
+    changeArea: PropTypes.func,
+  }
+
+  static defaultProps = {
+    changeArea: () => {},
+  }
+
+  constructor(args) {
+    super(args);
+    const area = args.area || ' ';
     this.state = {
-      currentValue: ' ',
+      currentValue: area,
       currentOption: null,
       open: false,
       list: [],
@@ -52,6 +61,7 @@ class Select extends React.Component {
     this.navigateFromMenu = this.navigateFromMenu.bind(this);
     this.navigateFromItem = this.navigateFromItem.bind(this);
     this.selectOption = this.selectOption.bind(this);
+    this.checkIfItHasStartSelection = this.checkIfItHasStartSelection.bind(this);
     this.selectRef = React.createRef();
     this.flagSelector = React.createRef();
   }
@@ -59,7 +69,9 @@ class Select extends React.Component {
   componentDidMount() {
     const { selectRef: { current } } = this;
     const list = [].slice.call(current.querySelectorAll('[aria-selected]'));
-    this.setState({ list });
+    this.setState({ list }, () => {
+      this.checkIfItHasStartSelection();
+    });
     list.forEach((item) => {
       item.addEventListener('keyup', (e) => {
         e.stopPropagation();
@@ -77,6 +89,16 @@ class Select extends React.Component {
         this.selectOption(e.target);
         this.flagSelector.current.focus();
       });
+    });
+  }
+
+  checkIfItHasStartSelection() {
+    const { currentValue, list } = this.state;
+    list.forEach((item) => {
+      if (Number(item.getAttribute('value')) === currentValue) {
+        item.setAttribute('aria-selected', 'true');
+        this.setState({ currentOption: item });
+      }
     });
   }
 
@@ -115,13 +137,22 @@ class Select extends React.Component {
     });
   }
 
+  updateArea() {
+    const { currentOption } = this.state;
+    const { changeArea } = this.props;
+    const target = currentOption;
+    changeArea({ target });
+  }
+
   selectOption(option) {
     if (option) {
       this.removeSelection();
       const currentValue = option.getAttribute('value');
       option.setAttribute('aria-selected', 'true');
       option.focus();
-      this.setState({ currentValue, currentOption: option });
+      this.setState({ currentValue, currentOption: option }, () => {
+        this.updateArea();
+      });
     }
   }
 
@@ -158,11 +189,11 @@ class Select extends React.Component {
         onKeyUp={this.navigateFromMenu}
         onClick={this.openCloseMenu}
       >
-        <div className="currentValue"> {currentValue} </div>
+        <div className="currentValue"> + {currentValue} </div>
         <ul className="listBox" tabIndex="-1" ref={this.selectRef} style={style}>
           {options}
         </ul>
-        <input type="hidden" value={currentValue} />
+        <input type="hidden" name="area" value={`+${currentValue}`} />
       </div>
     );
   }
