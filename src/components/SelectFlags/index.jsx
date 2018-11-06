@@ -43,15 +43,79 @@ class Select extends React.Component {
     super(arg);
     this.state = {
       currentValue: 0,
-      open: false
+      open: false,
     };
+    this.openMenuCloseByKey = this.openMenuCloseByKey.bind(this);
+    this.openCloseMenu = this.openCloseMenu.bind(this);
+    this.navigateFromMenu = this.navigateFromMenu.bind(this);
+    this.navigateFromItem = this.navigateFromItem.bind(this);
+    this.selectRef = React.createRef();
   }
 
+  componentDidMount() {
+    const { selectRef: { current } } = this;
+    const list = [].slice.call(current.querySelectorAll('[aria-selected]'));
+    list.forEach((item) => {
+      item.addEventListener('keyup', (e) => {
+        e.stopPropagation();
+        this.navigateFromItem(e);
+      });
+      item.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        // this.navigateFromItem(e);
+      });
+    });
+  }
+
+  openMenuCloseByKey(e) {
+    if (e.keyCode === 32 || e.keyCode === 13) this.openCloseMenu();
+  }
+
+  openCloseMenu() {
+    const { open } = this.state;
+    this.setState({ open: !open });
+  }
+
+  navigateFromMenu(e) {
+    console.log(e.target);
+    if (e.keyCode === 40) {
+      const menu = this.selectRef.current;
+      menu.querySelector('[aria-selected]').focus();
+    }
+  }
+
+  navigateFromItem(e) {
+    const { keyCode, target } = e;
+    let sibling;
+    switch (keyCode) {
+      case 40:
+        sibling = target.nextElementSibling;
+        if (sibling) sibling.focus();
+        break;
+      case 38:
+        sibling = target.previousElementSibling;
+        if (sibling) sibling.focus();
+        break;
+      default:
+        break;
+    }
+  }
+
+
   render() {
+    const { open } = this.state;
+    const style = open ? { display: 'block' } : { display: 'none' };
     return (
-      <div className="flagSelector" role="listbox" tabIndex="0">
+      <div
+        className="flagSelector"
+        role="listbox"
+        tabIndex="0"
+        onKeyDown={this.openMenuCloseByKey}
+        onKeyUp={this.navigateFromMenu}
+        onClick={this.openCloseMenu}
+      >
         <div className="currentValue">value </div>
-        <ul className="listBox" tabIndex="-1">
+        <ul className="listBox" tabIndex="-1" ref={this.selectRef} style={style}>
           {options}
         </ul>
       </div>
