@@ -59,4 +59,65 @@ describe('[Component] SelectFlagsOptions', () => {
     wrapper.setProps({ changeArea: change });
     wrapper.instance().selectOption(li);
   });
+  it('[function] removeSelection: should call change the attribute aria-selected of every child', () => {
+    wrapper.setState({ list: [li, li2, li3] });
+    const original = (li2.outerHTML);
+    wrapper.instance().removeSelection();
+    expect(li2.outerHTML).not.toEqual(original);
+  });
+
+  it('[function] navigateFromMenu: should call openCloseMenu by keycode 40', () => {
+    const originalValue = wrapper.state('open');
+    const e = { keyCode: 40 };
+    wrapper.instance().navigateFromMenu(e);
+    expect(originalValue).not.toEqual(wrapper.state('open'));
+  });
+
+  it('[function] navigateFromMenu: should call openCloseMenu by keycode 38', () => {
+    const originalValue = wrapper.state('open');
+    const e = { keyCode: 38 };
+    wrapper.instance().navigateFromMenu(e);
+    expect(originalValue).not.toEqual(wrapper.state('open'));
+  });
+
+  it('[function] navigateFromMenu: should call navigateFromItem by keycode 38 once', () => {
+    wrapper.setState({ open: true, currentOption: li });
+    const e = { keyCode: 38 };
+    wrapper.instance().navigateFromItem = jest.fn();
+    const res = wrapper.instance().navigateFromMenu(e);
+    expect(res).toEqual(li);
+    expect(wrapper.instance().navigateFromItem.mock.calls.length).toBe(1);
+  });
+
+  it('[function] navigateFromMenu: should call navigateFromItem by keycode 38 once', () => {
+    wrapper.setState({ open: true });
+    wrapper.instance().selectRef = { current: fakeList };
+    const e = { keyCode: 38 };
+    wrapper.instance().selectOption = jest.fn();
+    wrapper.instance().navigateFromMenu(e);
+    expect(wrapper.instance().selectOption.mock.calls.length).toBe(1);
+  });
+
+  it('[function] navigateFromMenu: should return false', () => {
+    wrapper.setState({ open: true });
+    const e = { keyCode: 666 };
+    expect(wrapper.instance().navigateFromMenu(e)).toBe(false);
+  });
+
+  it('[function] openMenuCloseByKey: should call openCloseMenu by keycode 32 once', () => {
+    const e = { keyCode: 32 };
+    wrapper.instance().openCloseMenu = jest.fn();
+    wrapper.instance().openMenuCloseByKey(e);
+    expect(wrapper.instance().openCloseMenu.mock.calls.length).toBe(1);
+  });
+  it('[function] openMenuCloseByKey: should call openCloseMenu by keycode 13 once', () => {
+    const e = { keyCode: 13 };
+    wrapper.instance().openCloseMenu = jest.fn();
+    wrapper.instance().openMenuCloseByKey(e);
+    expect(wrapper.instance().openCloseMenu.mock.calls.length).toBe(1);
+  });
 });
+
+// openCloseMenu(e) {
+//   if (e.keyCode === 32 || e.keyCode === 13) this.openCloseMenu();
+// }
