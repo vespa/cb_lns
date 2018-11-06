@@ -42,19 +42,24 @@ class Select extends React.Component {
   constructor(arg) {
     super(arg);
     this.state = {
-      currentValue: 0,
+      currentValue: ' ',
+      currentOption: null,
       open: false,
+      list: [],
     };
     this.openMenuCloseByKey = this.openMenuCloseByKey.bind(this);
     this.openCloseMenu = this.openCloseMenu.bind(this);
     this.navigateFromMenu = this.navigateFromMenu.bind(this);
     this.navigateFromItem = this.navigateFromItem.bind(this);
+    this.selectOption = this.selectOption.bind(this);
     this.selectRef = React.createRef();
+    this.flagSelector = React.createRef();
   }
 
   componentDidMount() {
     const { selectRef: { current } } = this;
     const list = [].slice.call(current.querySelectorAll('[aria-selected]'));
+    this.setState({ list });
     list.forEach((item) => {
       item.addEventListener('keyup', (e) => {
         e.stopPropagation();
@@ -62,7 +67,15 @@ class Select extends React.Component {
       });
       item.addEventListener('keydown', (e) => {
         e.stopPropagation();
-        // this.navigateFromItem(e);
+        if (e.keyCode === 13) {
+          this.openCloseMenu();
+          this.flagSelector.current.focus();
+        }
+      });
+      item.addEventListener('focus', (e) => {
+        e.stopPropagation();
+        this.selectOption(e.target);
+        this.flagSelector.current.focus();
       });
     });
   }
@@ -77,24 +90,54 @@ class Select extends React.Component {
   }
 
   navigateFromMenu(e) {
-    console.log(e.target);
-    if (e.keyCode === 40) {
+    const { open, currentOption } = this.state;
+    if (e.keyCode === 40 || e.keyCode === 38) {
+      if (!open) {
+        this.openCloseMenu();
+        return open;
+      }
+      if (currentOption) {
+        this.navigateFromItem(e, currentOption);
+        return currentOption;
+      }
       const menu = this.selectRef.current;
-      menu.querySelector('[aria-selected]').focus();
+      const option = menu.querySelector('[aria-selected]');
+      this.selectOption(option);
+      return option;
+    }
+    return false;
+  }
+
+  removeSelection() {
+    const { list } = this.state;
+    list.forEach((item) => {
+      item.setAttribute('aria-selected', 'false');
+    });
+  }
+
+  selectOption(option) {
+    if (option) {
+      this.removeSelection();
+      const currentValue = option.getAttribute('value');
+      option.setAttribute('aria-selected', 'true');
+      option.focus();
+      this.setState({ currentValue, currentOption: option });
     }
   }
 
-  navigateFromItem(e) {
-    const { keyCode, target } = e;
+  navigateFromItem(e, item) {
+    const { keyCode } = e;
+    let { target } = e;
     let sibling;
+    target = item || target;
     switch (keyCode) {
       case 40:
         sibling = target.nextElementSibling;
-        if (sibling) sibling.focus();
+        this.selectOption(sibling);
         break;
       case 38:
         sibling = target.previousElementSibling;
-        if (sibling) sibling.focus();
+        this.selectOption(sibling);
         break;
       default:
         break;
@@ -103,10 +146,11 @@ class Select extends React.Component {
 
 
   render() {
-    const { open } = this.state;
+    const { open, currentValue } = this.state;
     const style = open ? { display: 'block' } : { display: 'none' };
     return (
       <div
+        ref={this.flagSelector}
         className="flagSelector"
         role="listbox"
         tabIndex="0"
@@ -114,10 +158,11 @@ class Select extends React.Component {
         onKeyUp={this.navigateFromMenu}
         onClick={this.openCloseMenu}
       >
-        <div className="currentValue">value </div>
+        <div className="currentValue"> {currentValue} </div>
         <ul className="listBox" tabIndex="-1" ref={this.selectRef} style={style}>
           {options}
         </ul>
+        <input type="hidden" value={currentValue} />
       </div>
     );
   }

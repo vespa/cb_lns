@@ -452,6 +452,8 @@ input:-webkit-autofill {
   border-bottom: solid 1px #A7A7B3;
   overflow: hidden;
   height: 28px; }
+  .flagSelector .currentValue {
+    height: inherit; }
   .flagSelector:focus {
     border-bottom: 1px solid #6645FF;
     background-color: #EAE9F3; }
@@ -468,8 +470,9 @@ input:-webkit-autofill {
     .flagSelector ul li {
       height: 28px;
       padding: 3px 12px; }
-      .flagSelector ul li:focus {
-        background-color: blue; }
+      .flagSelector ul li:focus, .flagSelector ul li[aria-selected=true], .flagSelector ul li:hover {
+        background-color: #6645FF;
+        color: #FFFFFF; }
 
 .text-right {
   text-align: right; }

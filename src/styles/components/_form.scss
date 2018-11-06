@@ -99,6 +99,9 @@ input:-webkit-autofill {
   border-bottom: solid 1px $color-positive-lighter;
   overflow: hidden;
   height: 28px;
+  .currentValue{
+    height: inherit;
+  }
   &:focus {
     border-bottom: 1px solid $color-moradul-dark ;
     background-color: #EAE9F3;
@@ -116,8 +119,9 @@ input:-webkit-autofill {
     li {
       height: 28px;
       padding: 3px 12px;
-      &:focus {
-        background-color: blue;
+      &:focus, &[aria-selected=true], &:hover {
+        background-color: $color-moradul-dark ;
+        color: $color-white;
       }
     }
   }
