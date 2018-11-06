@@ -1,42 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import FlagIcon from 'react-flag-kit/lib/FlagIcon';
-
-const Flag = ({ country, number, name }) => (
-  <Fragment>
-    <div className="col3">
-      <FlagIcon code={country} size={23} />
-    </div>
-    <div className="col7" style={{ padding: '2px' }}>
-      {name}
-    </div>
-    <div className="col2 text-right">
-      {number}
-    </div>
-  </Fragment>
-);
-
-Flag.propTypes = {
-  country: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-};
-
-const FlagOption = options => options.map(item => (
-  <li key={item.number} value={item.number} className="row" aria-selected="false" role="option" tabIndex="-1">
-    <Flag country={item.country} number={item.number} name={item.name} />
-  </li>));
-
-
-const options = FlagOption([
-  { country: 'BR', number: 55, name: 'Brazil' },
-  { country: 'CL', number: 56, name: 'Chile' },
-  { country: 'CO', number: 57, name: 'Colombia' },
-  { country: 'ES', number: 34, name: 'Spain' },
-  { country: 'PT', number: 351, name: 'Portugal' },
-  { country: 'US', number: 1, name: 'USA' },
-]);
-
+import options from '../SelectFlagsOptions';
 
 class Select extends React.Component {
   static propTypes = {
@@ -67,7 +31,12 @@ class Select extends React.Component {
   }
 
   componentDidMount() {
+    this.configureOptions();
+  }
+
+  configureOptions() {
     const { selectRef: { current } } = this;
+    if (!current) return false;
     const list = [].slice.call(current.querySelectorAll('[aria-selected]'));
     this.setState({ list }, () => {
       this.checkIfItHasStartSelection();
@@ -90,6 +59,7 @@ class Select extends React.Component {
         this.flagSelector.current.focus();
       });
     });
+    return list;
   }
 
   checkIfItHasStartSelection() {
@@ -165,16 +135,15 @@ class Select extends React.Component {
       case 40:
         sibling = target.nextElementSibling;
         this.selectOption(sibling);
-        break;
+        return sibling;
       case 38:
         sibling = target.previousElementSibling;
         this.selectOption(sibling);
-        break;
+        return sibling;
       default:
-        break;
+        return target;
     }
   }
-
 
   render() {
     const { open, currentValue } = this.state;
