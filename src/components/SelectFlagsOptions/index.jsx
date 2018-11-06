@@ -5,13 +5,23 @@ import FlagIcon from 'react-flag-kit/lib/FlagIcon';
 const Flag = ({ country, number, name }) => (
   <Fragment>
     <div className="col3">
-      <FlagIcon code={country} size={23} />
+      <div style={{
+        borderRadius: '50%',
+        overflow: 'hidden',
+        height: '15px',
+        width: '15px',
+      }}
+      >
+        <div style={{ position: 'relative', margin: '-4px 0 0 -4px' }}>
+          <FlagIcon code={country} size={23} />
+        </div>
+      </div>
     </div>
     <div className="col7" style={{ padding: '2px' }}>
       {name}
     </div>
     <div className="col2 text-right">
-      {number}
+      +{number}
     </div>
   </Fragment>
 );

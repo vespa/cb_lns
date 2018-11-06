@@ -119,6 +119,7 @@ input:-webkit-autofill {
     li {
       height: 28px;
       padding: 3px 12px;
+      font-size: 13px;
       &:focus, &[aria-selected=true], &:hover {
         background-color: $color-moradul-dark ;
         color: $color-white;

@@ -469,7 +469,8 @@ input:-webkit-autofill {
     display: none; }
     .flagSelector ul li {
       height: 28px;
-      padding: 3px 12px; }
+      padding: 3px 12px;
+      font-size: 13px; }
       .flagSelector ul li:focus, .flagSelector ul li[aria-selected=true], .flagSelector ul li:hover {
         background-color: #6645FF;
         color: #FFFFFF; }
